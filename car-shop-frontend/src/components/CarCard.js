@@ -1,37 +1,23 @@
+// src/components/CarCard.js
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const carData = [
-  {
-    id: 1,
-    name: "2022 Audi Q7",
-    price: "$55,800",
-    img: "https://avatars.mds.yandex.net/get-verba/216201/2a00000190ba3707792975ddf821124d3eee/auto_main"
-  },
-  {
-    id: 2,
-    name: "2021 BMW X5",
-    price: "$60,500",
-    img: "https://www.allcarz.ru/wp-content/uploads/2023/02/foto-x5-g05-upd_01.jpg"
-  },
-  {
-    id: 3,
-    name: "2020 Mercedes-Benz GLE",
-    price: "$75,200",
-    img: "https://di-uploads-pod16.dealerinspire.com/mercedesbenzofhuntington/uploads/2019/10/gle-2020-2.png"
-  }
-];
-
-const CarCard = () => {
+const CarCard = ({ cars }) => {
   return (
     <div className="car-section">
-      {carData.map((car) => (
-        <div key={car.id} className="car-card">
-          <img src={car.img} alt={car.name} />
+      {cars.map((car) => (
+        <Link to={`/car/${car.id}`} key={car.id} className="car-card">
+          <img
+            src={car.images && car.images[0] ? car.images[0] : "default-image-url.jpg"}
+            alt={car.name}
+            className="car-image"
+          />
           <div className="car-info">
             <h3>{car.name}</h3>
-            <p>{car.price}</p>
+            <p>${car.specs && car.specs.price ? car.specs.price.toLocaleString() : "N/A"}</p>
+            <p>{car.year}</p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
