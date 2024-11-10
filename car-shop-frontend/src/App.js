@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -35,7 +34,7 @@ function App() {
   const handleSearch = (query) => {
     const results = mockCars.filter((car) => car.name.toLowerCase().includes(query.toLowerCase()));
     setSearchResults(results);
-    setFilteredCars(results); // Обновляем отфильтрованные данные после поиска
+    setFilteredCars(results);
   };
 
   return (

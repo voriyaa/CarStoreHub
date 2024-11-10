@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -12,8 +11,8 @@ const Header = ({ onSearch }) => {
 
   const handleSearchSubmit = (e) => {
     if (e.key === 'Enter') {
-      onSearch(query); // Выполнение поиска
-      navigate('/'); // Переход на главную страницу после поиска
+      onSearch(query);
+      navigate('/');
     }
   };
 

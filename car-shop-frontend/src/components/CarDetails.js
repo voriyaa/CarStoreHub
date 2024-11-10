@@ -1,4 +1,3 @@
-// src/components/CarDetails.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import './CarDetails.css';
@@ -36,7 +35,6 @@ const CarDetails = ({ cars }) => {
         <h3>Chat with the seller</h3>
         <div className="chat-box">
           <p className="seller">Seller: Hello! How can I help you?</p>
-          {/* Добавьте возможность для сообщений пользователя */}
         </div>
         <div className="chat-input">
           <input type="text" placeholder="Type your message..." />

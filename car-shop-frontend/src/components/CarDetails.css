@@ -1,5 +1,3 @@
-/* CarDetails.css */
-
 .car-details-container {
   display: flex;
   flex-direction: column;
@@ -7,7 +5,7 @@
   width: 100vw;
   padding: 40px;
   box-sizing: border-box;
-  margin-top: 60px; /* Отступ для поднятия от заголовка */
+  margin-top: 60px;
 }
 
 .car-details {

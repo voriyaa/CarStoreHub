@@ -8,7 +8,6 @@ const Filters = ({ onApplyFilters, resetFiltersTrigger }) => {
   const [year, setYear] = useState('');
   const [priceRange, setPriceRange] = useState([10000, 100000]);
 
-  // Сброс фильтров при обновлении `resetFiltersTrigger`
   useEffect(() => {
     setSelectedBrands([]);
     setModel('');
@@ -32,7 +31,7 @@ const Filters = ({ onApplyFilters, resetFiltersTrigger }) => {
   };
 
   const handleApplyFilters = () => {
-    console.log("Нажата кнопка Apply filters"); // Проверка в консоли
+    console.log("Нажата кнопка Apply filters");
     onApplyFilters({
       brands: selectedBrands,
       model,

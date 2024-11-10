@@ -1,10 +1,8 @@
-/* src/components/Purchases.css */
-
 .purchases-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px; /* Добавлен больший отступ сверху */
+  padding: 40px 20px;
   width: 100vw;
   max-width: 100%;
   box-sizing: border-box;
@@ -16,7 +14,7 @@
   font-weight: bold;
   color: #333;
   text-align: center;
-  margin-bottom: 40px; /* Увеличенный отступ между заголовком и списком покупок */
+  margin-bottom: 40px;
 }
 
 .purchases-list {

@@ -16,12 +16,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 150px; /* Ограничиваем ширину карточки */
+  width: 150px;
 }
 
 .compare-car-image {
-  width: 100px; /* Фиксированная ширина изображения */
-  height: 75px; /* Фиксированная высота изображения */
+  width: 100px;
+  height: 75px;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -30,14 +30,14 @@
 .compare-title {
   font-size: 20px;
   text-align: center;
-  margin-bottom: 30px; /* Увеличен отступ снизу */
+  margin-bottom: 30px;
 }
 
 .compare-container h2 {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 80px; /* Добавлен большой отступ снизу для заголовка */
+  margin-bottom: 80px;
 }
 
 .compare-table {

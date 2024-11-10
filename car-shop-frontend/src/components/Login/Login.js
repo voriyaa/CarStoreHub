@@ -6,7 +6,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSignupClick = () => {
-    navigate('/signup'); // Перенаправление на страницу регистрации
+    navigate('/signup');
   };
 
   return (

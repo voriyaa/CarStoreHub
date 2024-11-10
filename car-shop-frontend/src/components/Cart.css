@@ -1,11 +1,9 @@
-/* src/components/Cart.css */
-
 .cart-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px; /* Добавлен больший отступ сверху */
+  padding: 40px 20px;
   width: 100vw;
   max-width: 100%;
   box-sizing: border-box;
@@ -15,7 +13,7 @@
 .cart-container h2 {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 40px; /* Увеличенный отступ между заголовком и элементами */
+  margin-bottom: 40px;
   color: #333;
   text-align: center;
 }
@@ -90,7 +88,7 @@
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: #000; /* Черный цвет для иконки */
+  color: #000;
   cursor: pointer;
   margin-left: 10px;
 }
