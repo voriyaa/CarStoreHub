@@ -1,0 +1,73 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f7fa;
+  width: 100vw;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signup-form h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.signup-form input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #d3d3d3;
+  border-radius: 8px;
+  background-color: #f0f4f8;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box; /* Для корректного выравнивания */
+}
+
+.name-inputs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.name-inputs input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d3d3d3;
+  border-radius: 8px;
+  background-color: #f0f4f8;
+  font-size: 14px;
+  box-sizing: border-box; /* Убедиться, что padding не влияет на ширину */
+}
+
+.signup-button {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  margin-top: 10px;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;
+}
