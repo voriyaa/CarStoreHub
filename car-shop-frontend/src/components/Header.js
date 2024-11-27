@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 const Header = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
@@ -13,6 +14,14 @@ const Header = ({ onSearch }) => {
     if (e.key === 'Enter') {
       onSearch(query);
       navigate('/');
+    }
+  };
+
+  const handleProfileClick = () => {
+    if (token) {
+      navigate('/profile');
+    } else {
+      navigate('/login');
     }
   };
 
@@ -30,7 +39,7 @@ const Header = ({ onSearch }) => {
         onKeyDown={handleSearchSubmit}
       />
       <div className="header-icons">
-        <Link to="/login"><i className="fas fa-user"></i></Link>
+        <button onClick={handleProfileClick}><i className="fas fa-user"></i></button>
         <Link to="/cart"><i className="fas fa-shopping-cart"></i></Link>
         <Link to="/purchases"><i className="fas fa-car"></i></Link>
         <Link to="/compare"><i className="fas fa-balance-scale"></i></Link>
