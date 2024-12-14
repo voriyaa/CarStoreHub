@@ -1,8 +1,11 @@
 from rest_framework import serializers
-from models import CartItem
+from .models import CartItem
+from cars.serializers import CarSerializer
 
 
 class CartItemSerializer(serializers.ModelSerializer):
+    car = CarSerializer(read_only=True)
+
     class Meta:
         model = CartItem
-        fields = ['id', 'user', 'car', 'quantity']
+        fields = ['car', 'quantity']

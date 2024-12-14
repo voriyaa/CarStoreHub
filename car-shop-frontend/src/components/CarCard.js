@@ -13,7 +13,7 @@ const CarCard = ({ cars }) => {
           />
           <div className="car-info">
             <h3>{car.name}</h3>
-            <p>${car.specs && car.specs.price ? car.specs.price.toLocaleString() : "N/A"}</p>
+            <p>${car.price ? car.price.toLocaleString() : "N/A"}</p> {}
             <p>{car.year}</p>
           </div>
         </Link>
