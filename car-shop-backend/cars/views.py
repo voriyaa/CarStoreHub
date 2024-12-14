@@ -16,30 +16,23 @@ class CarViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        search = self.request.query_params.get('search', None)
-        model = self.request.query_params.get('model', None)
-        year = self.request.query_params.get('year', None)
-        price_min = self.request.query_params.get('price_min', None)
-        price_max = self.request.query_params.get('price_max', None)
-        brands = self.request.query_params.get('brands', None)
+        query_params = self.request.query_params
 
-        if search:
-            queryset = queryset.filter(name__icontains=search)
+        filters = Q()
 
-        if model:
-            queryset = queryset.filter(name__icontains=model)
+        conditions = {
+            'name__icontains': query_params.get('search'),
+            'year': query_params.get('year'),
+            'price__gte': query_params.get('price_min'),
+            'price__lte': query_params.get('price_max')
+        }
 
-        if year:
-            queryset = queryset.filter(year=year)
+        filters &= Q(**{k: v for k, v in conditions.items() if v})
 
-        if price_min and price_max:
-            queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
-
-        if brands:
-            brand_list = brands.split(',')
+        if brands := query_params.get('brands'):
             brand_query = Q()
-            for brand in brand_list:
+            for brand in brands.split(','):
                 brand_query |= Q(name__icontains=brand)
-            queryset = queryset.filter(brand_query)
+            filters &= brand_query
 
-        return queryset
+        return queryset.filter(filters)
