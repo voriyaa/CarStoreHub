@@ -2,13 +2,13 @@ from django.db import models
 from django.conf import settings
 from cars.models import Car
 
-
-class Purchase(models.Model):
-    id = models.BigAutoField(primary_key=True)
+class CompareItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    purchase_date = models.DateTimeField(auto_now_add=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'car')
 
     def __str__(self):
-        return f"{self.user.username} bought {self.car.name}"
+        return f"{self.user.username} compares {self.car.name}"

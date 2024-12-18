@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-const Filters = ({ onApplyFilters, resetFiltersTrigger }) => {
+const Filters = ({ onApplyFilters }) => {
   const brands = ['Audi', 'BMW', 'Ford', 'Honda', 'Hyundai', 'Lexus', 'Mazda', 'Mercedes-Benz', 'Nissan', 'Subaru', 'Toyota', 'Volkswagen'];
 
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -8,30 +8,13 @@ const Filters = ({ onApplyFilters, resetFiltersTrigger }) => {
   const [year, setYear] = useState('');
   const [priceRange, setPriceRange] = useState([10000, 100000]);
 
-  useEffect(() => {
-    setSelectedBrands([]);
-    setModel('');
-    setYear('');
-    setPriceRange([10000, 100000]);
-  }, [resetFiltersTrigger]);
-
   const toggleBrand = (brand) => {
     setSelectedBrands((prevSelected) =>
-      prevSelected.includes(brand) ? prevSelected.filter(b => b !== brand) : [...prevSelected, brand]
+      prevSelected.includes(brand) ? prevSelected.filter((b) => b !== brand) : [...prevSelected, brand]
     );
   };
 
-  const handleModelChange = (e) => setModel(e.target.value);
-  const handleYearChange = (e) => setYear(e.target.value);
-
-  const handlePriceChange = (e, index) => {
-    const newPriceRange = [...priceRange];
-    newPriceRange[index] = Number(e.target.value);
-    setPriceRange(newPriceRange);
-  };
-
   const handleApplyFilters = () => {
-    console.log("Нажата кнопка Apply filters");
     onApplyFilters({
       brands: selectedBrands,
       model,
@@ -57,17 +40,43 @@ const Filters = ({ onApplyFilters, resetFiltersTrigger }) => {
       </div>
 
       <div className="filter-inputs">
-        <input type="text" placeholder="Model" value={model} onChange={handleModelChange} />
-        <input type="text" placeholder="Year" value={year} onChange={handleYearChange} />
+        <input
+          type="text"
+          placeholder="Model"
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+        />
 
         <div className="price-range">
           <label>Price</label>
-          <input type="range" min="10000" max="100000" value={priceRange[0]} onChange={(e) => handlePriceChange(e, 0)} />
-          <input type="range" min="10000" max="100000" value={priceRange[1]} onChange={(e) => handlePriceChange(e, 1)} />
-          <p>Price: ${priceRange[0]} - ${priceRange[1]}</p>
+          <input
+            type="range"
+            min="10000"
+            max="100000"
+            value={priceRange[0]}
+            onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+          />
+          <input
+            type="range"
+            min="10000"
+            max="100000"
+            value={priceRange[1]}
+            onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+          />
+          <p>
+            Price: ${priceRange[0]} - ${priceRange[1]}
+          </p>
         </div>
 
-        <button className="apply-filters" onClick={handleApplyFilters}>Apply filters</button>
+        <button className="apply-filters" onClick={handleApplyFilters}>
+          Apply filters
+        </button>
       </div>
     </div>
   );

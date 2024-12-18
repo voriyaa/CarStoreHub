@@ -1,52 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Filters from './components/Filters';
 import CarCard from './components/CarCard';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import Profile from './components/Profile/Profile';
 import Cart from './components/Cart';
 import Purchases from './components/Purchases';
 import Compare from './components/Compare';
 import CarDetails from './components/CarDetails';
-import { cars as mockCars } from './components/data/mockData';
+import api from './api';
 import './styles/styles.css';
 
 function App() {
-  const [filteredCars, setFilteredCars] = useState(mockCars);
-  const [searchResults, setSearchResults] = useState(mockCars);
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({
+    brands: [],
+    model: '',
+    year: '',
+    minPrice: 10000,
+    maxPrice: 100000,
+  });
 
-  const handleApplyFilters = (filters) => {
-    const { brands, model, year, minPrice, maxPrice } = filters;
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const response = await api.get('/cars/', {
+          params: {
+            search: searchQuery,
+            model: filters.model,
+            year: filters.year,
+            price_min: filters.minPrice,
+            price_max: filters.maxPrice,
+            brands: filters.brands.join(','),
+          },
+        });
+        setFilteredCars(response.data);
+      } catch (error) {
+        console.error('Error fetching cars:', error);
+      }
+    };
 
-    const filtered = searchResults.filter((car) => {
-      const matchesBrand = brands.length === 0 || brands.some((brand) => car.name.toLowerCase().includes(brand.toLowerCase()));
-      const matchesModel = model === '' || car.name.toLowerCase().includes(model.toLowerCase());
-      const matchesYear = year === '' || car.year === parseInt(year, 10);
-      const matchesPrice = car.specs.price >= minPrice && car.specs.price <= maxPrice;
+    fetchCars();
+  }, [searchQuery, filters]);
 
-      return matchesBrand && matchesModel && matchesYear && matchesPrice;
-    });
-
-    setFilteredCars(filtered);
+  const handleApplyFilters = (newFilters) => {
+    setFilters(newFilters);
   };
 
   const handleSearch = (query) => {
-    const results = mockCars.filter((car) => car.name.toLowerCase().includes(query.toLowerCase()));
-    setSearchResults(results);
-    setFilteredCars(results);
+    setSearchQuery(query);
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      brands: [],
+      model: '',
+      year: '',
+      minPrice: 10000,
+      maxPrice: 100000,
+    });
+    setSearchQuery('');
   };
 
   return (
     <Router>
       <div className="App">
-        <Header onSearch={handleSearch} />
+        <Header onSearch={handleSearch} resetFilters={resetFilters} />
         <Routes>
           <Route
             path="/"
             element={
               <div className="main-content">
-                <Filters onApplyFilters={handleApplyFilters} />
+                <Filters onApplyFilters={handleApplyFilters} resetFiltersTrigger={resetFilters} />
                 <div className="car-section">
                   <h2>Find the right car for you</h2>
                   <p>{filteredCars.length} cars found</p>
@@ -57,10 +85,11 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/purchases" element={<Purchases />} />
           <Route path="/compare" element={<Compare />} />
-          <Route path="/car/:id" element={<CarDetails cars={mockCars} />} />
+          <Route path="/car/:id" element={<CarDetails cars={filteredCars} />} />
         </Routes>
       </div>
     </Router>

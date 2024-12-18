@@ -57,4 +57,9 @@
   width: 100%;
   background-color: #007bff;
   color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.login-button:hover, .signup-button:hover {
+  background-color: #0056b3;
 }

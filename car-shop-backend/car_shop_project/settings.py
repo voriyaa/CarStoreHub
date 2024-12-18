@@ -10,6 +10,7 @@ INSTALLED_APPS = [
     'cars',
     'cart',
     'purchases',
+    'compare_cars',
     'users',
 ]
 
@@ -37,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -72,4 +74,30 @@ SECRET_KEY = ')pqa=ut*vsa)74m!j@&-3=6j*1!#hk_fcrqa%-4sp1-ek!09+y'
 
 INSTALLED_APPS += [
     'rest_framework',
+    'django_extensions',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'django_filters',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:8000',
+]
+
+REST_FRAMEWORK['DEFAULT_FILTER_BACKENDS'] = [
+    'django_filters.rest_framework.DjangoFilterBackend',
+    'rest_framework.filters.SearchFilter',
 ]

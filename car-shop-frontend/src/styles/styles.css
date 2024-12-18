@@ -56,10 +56,10 @@ body, html {
 .header-icons {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .header-icons i {
-  margin-left: 20px;
   font-size: 20px;
   color: #333;
   cursor: pointer;
@@ -71,6 +71,28 @@ body, html {
 }
 
 .header-icons i:hover {
+  color: #007bff;
+}
+
+.header-icons button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header-icons button:focus {
+  outline: none;
+}
+
+.header-icons button i {
+  margin-left: 20px;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+.header-icons button i:hover {
   color: #007bff;
 }
 
@@ -160,6 +182,15 @@ body, html {
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.apply-filters:hover {
+  background-color: #0056b3;
+}
+
+.apply-filters:active {
+  background-color: #003f7f;
 }
 
 .car-section {
